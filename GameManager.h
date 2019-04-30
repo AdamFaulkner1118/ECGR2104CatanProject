@@ -15,7 +15,7 @@ class GameManager {
     void buildSettlement(/*Passed player class info*/); // Should check resource totals, whether a settlement already exists, and whether the player owns land adjacent to the requested tile.
     void buildCity(/*Passed player class info*/); // Should check resource totals and whether a settlement already exists.
     void buyDevelopmentCard(/*Passed player class info*/); //Should check resource totals.
-    void updateResourcesPost(int /*Scanario (settlement, city, dev cards)*/) // Updates resources after the player's action.
+    void updateResourcesPost(int /*Scanario (settlement, city, dev cards)*/); // Updates resources after the player's action.
     void updateResourcesCheck(int /*dice roll*/); // Should compare dice roll with the numbers associated with owned land plots, determining to give resources or not.
 }
 
