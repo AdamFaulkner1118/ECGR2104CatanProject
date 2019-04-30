@@ -1,4 +1,5 @@
-for bordgame.h
+#ifndef GAMEBOARD_H
+#define GAMEBOARD_H
 
 #include <iostream>
 #include <sstream>
