@@ -4,7 +4,6 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-//#include "tile.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "GameBoard.cpp"
+#include "GameBoard.h"
 
 void GameBoard::setLand(LandType L){
     land = L;

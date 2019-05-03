@@ -2,10 +2,18 @@
 #define PLAYER_H
 
 #include <iostream>
+#include <string>
+#include <vector>
+#include <array>
+#include <fstream>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
 
 class Player{
     private:
-    string playerName;
+    string name;
     
     public:
     int victoryPoints;
@@ -15,9 +23,10 @@ class Player{
     int woolCount;
     int oreCount;
     
-    Player();
-    Player(string);
+
     string getName();
-}
+    
+    
+};
 
 #endif
