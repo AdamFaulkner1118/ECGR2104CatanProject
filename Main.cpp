@@ -13,7 +13,50 @@ using namespace std;
 #include "Player.h"
 #include "Tile.h"
 
+void buildBoard(vector<Tile*> &tiles, int row, int col){
+        Tile* t=NULL;
+        for(int i=0; i<row; i++){
+            for(int j=0; j<col; j++){
+                int L=rand() % 4;
+                int R=0;
+                int n=(rand() % 12)+ 1 ;
+                string name="Null";
+                t= new Tile((LandType)L, (ResourcesType)R, n, name);
+                tiles.push_back(t);
+            }
+        }
+}
+
+void renderBoard(vector<Tile*> &tiles, int row, int col){
+    int t=0;
+    if(tiles.size()>0){
+        //For the number of rows
+        for(int n=0; n<row; n++){
+            //For the number of string lines
+            for(int i=0; i<=8; i++){
+                //For the number of columns
+                        int j=(((n+1)-1)*col);
+                        int j2=(((n+1)-1)*col)+col;
+                        for(j; j<j2; j++){
+                            cout<<tiles.at(j)->render(i);
+                        }
+                cout<< endl;
+            }
+        }
+    }
+    else{
+        for(int i = 0; i < row; i++)
+            cout << endl;
+    }
+}
+
+
 int main() {
+    srand(time(0));
+    vector<Tile*> tiles;
+    
+    int row=5;
+    int col=7;
     
     int totalPlayerCount;
     
@@ -26,8 +69,12 @@ Player players[totalPlayerCount];
 
 
 //Rosa, how do I use the rendering of the gameboard?
-GameBoard gameboard;
-gameboard.render(5);
+buildBoard(tiles, row, col);
+    cout<<"Number of tiles: "<<tiles.size()<<endl;
+    
+    renderBoard(tiles, row, col);
+    cout<<endl;
+
 
 
 
@@ -48,3 +95,5 @@ gameboard.render(5);
 
     return 0;
 }
+
+//g++ Main.cpp GameBoard.cpp Player.cpp Tile.cpp GameManager.cpp -o test -std=c++11
