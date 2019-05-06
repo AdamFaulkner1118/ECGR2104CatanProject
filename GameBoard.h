@@ -19,6 +19,8 @@ class GameBoard{
     //describe number associated
     int num;
     string name;
+    //Choice of settlement or city
+    int choice;
     
     public:
     void setLand(LandType);
@@ -31,7 +33,8 @@ class GameBoard{
     void setPlayer(string);
     string getPlayer();
     //Need to set if its a settlement or city
-    
+    void setSettOrCity(int);
+    int getSettOrCity();
 
     virtual string render(int); 
    
@@ -39,7 +42,7 @@ class GameBoard{
 
 class Tile : public GameBoard{
     public:
-    Tile(LandType, ResourcesType, int, string);
+    Tile(LandType, ResourcesType, int, string, int);
     string render(int);
 };
 

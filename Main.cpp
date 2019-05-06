@@ -17,6 +17,7 @@ vector<int> land;
 vector<int> resorces;
 vector<int> num;
 vector<string> names;
+vector<int> settOrCity;
 void buildBoard(vector<Tile*> &tiles, int row, int col){
         //Tile* t=NULL;
         for(int i=0; i<row; i++){
@@ -25,7 +26,9 @@ void buildBoard(vector<Tile*> &tiles, int row, int col){
                 int R=0;
                 int n=(rand() % 12)+ 1 ;
                 string name="Null";
-                tiles.push_back(new Tile((LandType)L, (ResourcesType)R, n, name));
+                int choice=-1;
+                settOrCity.push_back(-1);
+                tiles.push_back(new Tile((LandType)L, (ResourcesType)R, n, name, choice));
                 //tiles.push_back(t);
             }
         }
@@ -54,9 +57,9 @@ void renderBoard(vector<Tile*> &tiles, int row, int col){
     }
 }
 
-void updateBoard(vector<Tile*> &tiles, string name, int col, int rowNum, int colNum){
+void updateBoard(vector<Tile*> &tiles, string name, int col, int rowNum, int colNum, int choice){
     int tileNum=((rowNum-1)*col)+(colNum-1);
-    tiles.push_back(new Tile((LandType)land.at(tileNum), (ResourcesType)resorces.at(tileNum), num.at(tileNum), name));
+    tiles.push_back(new Tile((LandType)land.at(tileNum), (ResourcesType)resorces.at(tileNum), num.at(tileNum), name, choice));
     tiles[tileNum]=tiles.at(tiles.size()-1);
     //To delete index just made
     tiles.pop_back();
@@ -96,7 +99,10 @@ int main() {
     cout<<"Enter column number";
     int colNum;
     cin>>colNum;
-    updateBoard(tiles, name, col, rowNum, colNum);
+    cout<<"Enter 0:Settelment or 1:City: ";
+    int choice;
+    cin>>choice;
+    updateBoard(tiles, name, col, rowNum, colNum, choice);
     renderBoard(tiles, row, col);
     cout<<endl;
 

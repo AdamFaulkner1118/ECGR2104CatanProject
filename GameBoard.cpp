@@ -14,6 +14,10 @@ void GameBoard::setPlayer(string pname){
     name=pname;
 }
 
+void GameBoard::setSettOrCity(int pchoice){
+    choice=pchoice;
+}
+
 LandType GameBoard::getLand(){
     return land;
 }
@@ -29,6 +33,9 @@ string GameBoard::getPlayer(){
     return name;
 }
 
+int GameBoard::getSettOrCity(){
+    return choice;
+}
 
 string GameBoard::render(int line){
     stringstream ss;
@@ -46,11 +53,12 @@ string GameBoard::render(int line){
     }
 }
 
-Tile::Tile(LandType L, ResourcesType R, int n, string pname){
+Tile::Tile(LandType L, ResourcesType R, int n, string pname, int pchoice){
     setLand(L);
     setResource(R);
     setNumber(n);
     setPlayer(pname);
+    setSettOrCity(pchoice);
 }
 
 string Tile::render(int line){
@@ -99,10 +107,54 @@ string Tile::render(int line){
                     return ss.str();
                     break;
                 }
-        case 4: return "|             |";
-        case 5: return "|             |";
-        case 6: return "|             |";
-        case 7: return " ------------- ";
+        case 4:
+            if(choice==-1 || choice==0){
+                return "|             |";
+                break;
+            }
+            if(choice==1){
+                return "|      _   _  |";
+                break;}
+        case 5:
+            if(choice==-1){
+                return "|             |";
+                break;
+            }
+            if(choice==0){
+                return "|             |";
+                break;
+            }
+            if(choice==1){
+                return "|  | .|.|-|.| |";
+                break;
+            }
+        case 6:
+            if(choice==-1){
+                return "|             |";
+                break;
+            }
+            if(choice==0){
+                return "|     /''\\    |";
+                break;
+            }
+            if(choice==1){
+                return "| /.\\-|.|.|.| |";
+                break;
+            }
+        case 7: 
+            if(choice==-1){
+                return "|             |";
+                break;
+            }
+            if(choice==0){
+                return "|     |__|    |";
+                break;
+            }
+            else if(choice==1){
+                return "| |.|.|.|_|.| |";
+                break;
+            }
+        case 8: return " ------------- ";
         default:
             return " ";
     } 
