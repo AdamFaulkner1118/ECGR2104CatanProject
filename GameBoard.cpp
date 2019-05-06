@@ -91,7 +91,14 @@ string Tile::render(int line){
             break;
             }
                 
-        case 3: return "|             |";
+        case 3: 
+            if(name!="Null"){
+                   // string spaces=13-name.length();
+                    name.resize(13,' ');
+                    ss << "|"<<name<<"|";
+                    return ss.str();
+                    break;
+                }
         case 4: return "|             |";
         case 5: return "|             |";
         case 6: return "|             |";
