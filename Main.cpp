@@ -13,16 +13,20 @@ using namespace std;
 #include "Player.h"
 #include "Tile.h"
 
+vector<int> land;
+vector<int> resorces;
+vector<int> num;
+vector<string> names;
 void buildBoard(vector<Tile*> &tiles, int row, int col){
-        Tile* t=NULL;
+        //Tile* t=NULL;
         for(int i=0; i<row; i++){
             for(int j=0; j<col; j++){
                 int L=rand() % 4;
                 int R=0;
                 int n=(rand() % 12)+ 1 ;
                 string name="Null";
-                t= new Tile((LandType)L, (ResourcesType)R, n, name);
-                tiles.push_back(t);
+                tiles.push_back(new Tile((LandType)L, (ResourcesType)R, n, name));
+                //tiles.push_back(t);
             }
         }
 }
@@ -50,6 +54,14 @@ void renderBoard(vector<Tile*> &tiles, int row, int col){
     }
 }
 
+void updateBoard(vector<Tile*> &tiles, string name, int col, int rowNum, int colNum){
+    int tileNum=((rowNum-1)*col)+(colNum-1);
+    tiles.push_back(new Tile((LandType)land.at(tileNum), (ResourcesType)resorces.at(tileNum), num.at(tileNum), name));
+    tiles[tileNum]=tiles.at(tiles.size()-1);
+    //To delete index just made
+    tiles.pop_back();
+}
+
 
 int main() {
     srand(time(0));
@@ -60,22 +72,33 @@ int main() {
     
     int totalPlayerCount;
     
-cout << "Hi! Welcome to Settlers of Catan++" <<endl;
-cout << "Please enter the number of people playing: (2-6) " <<endl;
-cin >> totalPlayerCount;
-
-
-Player players[totalPlayerCount];
-
-
-//Rosa, how do I use the rendering of the gameboard?
-buildBoard(tiles, row, col);
+    cout << "Hi! Welcome to Settlers of Catan++" <<endl;
+    cout << "Please enter the number of people playing: (2-6) " <<endl;
+    cin >> totalPlayerCount;
+    
+    
+    Player players[totalPlayerCount];
+    
+    
+    //Rosa, how do I use the rendering of the gameboard?
+    buildBoard(tiles, row, col);
     cout<<"Number of tiles: "<<tiles.size()<<endl;
     
     renderBoard(tiles, row, col);
     cout<<endl;
-
-
+    
+    //To update board: need string name, row number and column number
+    //The col variable is the total number of columns
+    string name ="PersonName";
+    cout<<"Enter row number";
+    int rowNum;
+    cin>>rowNum;
+    cout<<"Enter column number";
+    int colNum;
+    cin>>colNum;
+    updateBoard(tiles, name, col, rowNum, colNum);
+    renderBoard(tiles, row, col);
+    cout<<endl;
 
 
 //logic for creating players
@@ -97,3 +120,5 @@ buildBoard(tiles, row, col);
 }
 
 //g++ Main.cpp GameBoard.cpp Player.cpp Tile.cpp GameManager.cpp -o test -std=c++11
+
+
