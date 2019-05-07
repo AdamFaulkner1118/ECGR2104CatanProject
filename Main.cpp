@@ -61,6 +61,8 @@ void updateBoard(vector<Tile*> &tiles, string name, int col, int rowNum, int col
     int tileNum=((rowNum-1)*col)+(colNum-1);
     tiles.push_back(new Tile((LandType)land.at(tileNum), (ResourcesType)resorces.at(tileNum), num.at(tileNum), name, choice));
     tiles[tileNum]=tiles.at(tiles.size()-1);
+    names.at(tileNum)=name;
+    settOrCity.at(tileNum)=choice;
     //To delete index just made
     tiles.pop_back();
 }
