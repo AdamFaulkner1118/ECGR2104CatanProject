@@ -22,8 +22,8 @@ void buildBoard(vector<Tile*> &tiles, int row, int col){
         //Tile* t=NULL;
         for(int i=0; i<row; i++){
             for(int j=0; j<col; j++){
-                int L=rand() % 4;
-                int R=0;
+                int L=rand() % 5;
+                int R=L;
                 int n=(rand() % 12)+ 1 ;
                 string name="Null";
                 int choice=-1;
