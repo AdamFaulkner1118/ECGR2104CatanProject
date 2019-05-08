@@ -23,9 +23,11 @@ class Player{
     int woolCount;
     int oreCount;
     
-
+    Player();
+    Player(string);
     string getName();
-    
+    void printResources();
+    void printVictoryPoints();
     
 };
 

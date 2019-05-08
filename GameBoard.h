@@ -22,6 +22,7 @@ class GameBoard{
     //Choice of settlement or city
     int choice;
     
+    
     public:
     void setLand(LandType);
     void setResource(ResourcesType);
@@ -35,8 +36,11 @@ class GameBoard{
     //Need to set if its a settlement or city
     void setSettOrCity(int);
     int getSettOrCity();
+    int nameNum;
 
-    virtual string render(int); 
+    virtual string render(int);
+    
+    int getChoice();
    
 };
 
