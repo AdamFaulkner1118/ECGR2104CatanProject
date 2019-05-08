@@ -29,11 +29,7 @@ void buildBoard(vector<Tile*> &tiles, int row, int col){
             for(int j=0; j<col; j++){
                 int L=rand() % 5;
                 int R=L;
-<<<<<<< HEAD
                 int n=(rand() % 11)+ 2 ;
-=======
-                int n=(rand() % 12)+ 1 ;
->>>>>>> 1e5eca9a556e4e0d6d91bc960bce9a6bed869687
                 string name="Null";
                 int choice=-1;
                 settOrCity.push_back(-1);
@@ -94,6 +90,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
     int dice2;
     int diceTot;
     int x = gameManager.getCurrentPlayer();
+    revert = false;
     if (revert == false) {
         renderBoard(tiles, row, col);
         cout << players[x]->getName() << "'s turn." << endl;
@@ -185,7 +182,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
     
     players[x]->printResources();
     
-    
+    afterdice:
     
     
     int playerDecision = 0;
@@ -431,8 +428,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 }
                 else {
                     cout<<"You do not have enough resources to build a settlement."<<endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                     break;
             case 2:
@@ -455,8 +451,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                         //checks to see if existing city/ sett in target
                     } else if (tiles[aLoc]->getSettOrCity() != 0){
                         cout<<"You can only build a city onto an existing settlement."<<endl;
-                        revert = true;
-                        return;
+                        goto afterdice;
                     } else if (
                         (tiles[aLoc]->getSettOrCity() == 0) && (tiles[aLoc]->getPlayer() != players[x]->getName())
                         ||
@@ -476,17 +471,17 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                         
                 } else {
                     cout<<"You do not have enough resources to build a city."<<endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 break;
             case 3:
                 if (players[x]->oreCount > 0 && players[x]->grainCount > 0 &&
                 players[x]->woolCount > 0){
-                    cout<<"in dev card area"<<endl;
+                    players[x]->oreCount--;
+                    players[x]->grainCount--;
+                    players[x]->woolCount--;
                     int randDevCard = ((rand()%5));
                     //Library
-                    cout<<"randDevCard: "<<randDevCard<<endl;
                     if (randDevCard == 0){
                         cout<<"You built a Library and gained 1 victory point!"<<endl;
                         players[x]->victoryPoints++;
@@ -562,17 +557,14 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 // If card is a Knight, choose who to steal resources from.
                 else {
                     cout<< "You can not afford a development card!"<<endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 
                 break;
             case 4:
-                revert = true;
-                return;
+                goto afterdice;
             default:
-                revert = true;
-                return;
+                goto afterdice;
         }
     }
     else if (playerDecision == 2) {
@@ -586,8 +578,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 }
                 else {
                     cout << "You do not have enough of this resource." << endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 break;
             case 2:
@@ -596,8 +587,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 }
                 else {
                     cout << "You do not have enough of this resource." << endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 break;
             case 3:
@@ -606,8 +596,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 }
                 else {
                     cout << "You do not have enough of this resource." << endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 break;
             case 4:
@@ -616,8 +605,7 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 }
                 else {
                     cout << "You do not have enough of this resource." << endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 break;
             case 5:
@@ -626,17 +614,14 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 }
                 else {
                     cout << "You do not have enough of this resource." << endl;
-                    revert = true;
-                    return;
+                    goto afterdice;
                 }
                 break;
             case 6:
-                revert = true;
-                return;
+                goto afterdice;
             default:
                 cout << "Invalid response" << endl;
-                revert = true;
-                return;
+                goto afterdice;
         }
         cout << "Which resource would you like to receive?" <<endl;
         cout << "1: Wood, 2: Bricks, 3: Grain, 4: Wool, or 5: Ore" << endl;
