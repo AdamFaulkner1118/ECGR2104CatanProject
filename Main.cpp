@@ -29,7 +29,11 @@ void buildBoard(vector<Tile*> &tiles, int row, int col){
             for(int j=0; j<col; j++){
                 int L=rand() % 5;
                 int R=L;
+<<<<<<< HEAD
                 int n=(rand() % 11)+ 2 ;
+=======
+                int n=(rand() % 12)+ 1 ;
+>>>>>>> 1e5eca9a556e4e0d6d91bc960bce9a6bed869687
                 string name="Null";
                 int choice=-1;
                 settOrCity.push_back(-1);
@@ -66,6 +70,8 @@ void updateBoard(vector<Tile*> &tiles, string name, int col, int rowNum, int col
     int tileNum=((rowNum-1)*col)+(colNum-1);
     tiles.push_back(new Tile((LandType)land.at(tileNum), (ResourcesType)resorces.at(tileNum), num.at(tileNum), name, choice));
     tiles[tileNum]=tiles.at(tiles.size()-1);
+    names.at(tileNum)=name;
+    settOrCity.at(tileNum)=choice;
     //To delete index just made
     tiles.pop_back();
 }
