@@ -182,10 +182,13 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
     
     players[x]->printResources();
     
-    afterdice:
+    
     
     
     int playerDecision = 0;
+    
+    afterdice:
+    
     cout << "Do you want to 1: Buy, 2: Trade, or 3: End Turn" << endl;
     cin >> playerDecision;
     if (playerDecision == 1) {
@@ -647,16 +650,15 @@ void takeTurn(GameManager &gameManager, vector<Player*> players, vector<Tile*> t
                 revert = true;
                 return;
         }
-        revert = true;
-        return;
+        players[x]->printResources();
+        goto afterdice;
     }
     else if (playerDecision == 3){
         cout << "You have chosen to end your turn" << endl << endl;
     }
     else {
         cout<< "Invalid Response"<<endl;
-        revert = true;
-        return;
+        goto afterdice;
     }
     gameManager.nextTurn();
 }

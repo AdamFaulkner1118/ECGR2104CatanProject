@@ -13,11 +13,11 @@ Player::Player() {
 Player::Player(string chosenName) {
     name = chosenName;
     victoryPoints = 1;
-    woodCount = 1;
-    brickCount = 1;
-    grainCount = 1;
-    woolCount = 1;
-    oreCount = 1;
+    woodCount = 9;
+    brickCount = 9;
+    grainCount = 9;
+    woolCount = 9;
+    oreCount = 9;
 }
 
 string Player::getName() {
